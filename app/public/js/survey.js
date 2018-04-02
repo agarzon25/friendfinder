@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
-  // Object of tasklists
-  var task = [
+  // Object of questionlists
+  var question = [
     "Your Mind is always buzzing with unexplored ideas and plans.",
     "Generally speaking, you rely more on your experience than your imagination.",
     "You find it easy to stay relaxed and focused even when there is some pressure.",
@@ -16,19 +16,48 @@ $(document).ready(function() {
 
   var qn = 0
 
-  var taskDiv = [];
+  var questionDiv = [];
 
-  // Loop through each element in task and create table row  
-  task.forEach( t => {
+  var userObj = {};
+
+  // Loop through each element in question and create table row  
+  question.forEach( q => {
     qn++;
-    // Creating div/writing to display task data
-    taskDiv.push($("<h3>").text(`Question ${qn}`));
-    taskDiv.push($("<h4>").text(t));
-    // var btnDiv = $("<div class='dropdown'>")
-    // btnDiv.push($("<button>"))
-    // taskDiv.push(btnDiv)
+    // Creating div/writing to display question data
+    questionDiv.push($("<h3>").text(`Question ${qn}`));
+    questionDiv.push($("<h4>").text(q));
+    var btnDiv = $("<select class='custom-select col-sm-5' id='Answer-"+ qn +"'>")
+    btnDiv.append($("<option selected >Select an Option</option>"))
+    btnDiv.append($("<option value='1'>1 (Strongly Disagree)</option>"))
+    btnDiv.append($("<option value='2'>2</option>"))
+    btnDiv.append($("<option value='3'>3</option>"))
+    btnDiv.append($("<option value='4'>4</option>"))
+    btnDiv.append($("<option value='5'>5 (Strongly Agree)</option>"))
+    questionDiv.push(btnDiv)
   })
 
-  // Append taskDiv to tableData div
-  $("#tableData").append(taskDiv);
+  // Append questionDiv to tableData div
+  $("#tableData").append(questionDiv);
+
+  $("#submit").click(() => {
+    var scores = []
+    // console.log($("#name").val());
+    var userName = $("#name").val();
+    
+    // console.log($("#photo").val());
+    var userPhoto = $("#photo").val();
+
+    for (let i=1;i<=10;i++) {
+      // console.log($("#Answer-"+ i).val());
+      scores.push($("#Answer-"+ i).val())
+    }
+    userObj = {
+      name: userName,
+      photo: userPhoto,
+      scores: scores
+    }
+
+    console.log(userObj)
+  })
 })
+

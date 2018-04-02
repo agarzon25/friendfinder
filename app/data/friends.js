@@ -7,5 +7,11 @@ var allFriendsData = [
 	}
 ];
 
-module.exports = allFriendsData
+var newFriend = function(name, photo, scores) {
+	this.name = name;
+	this.photo = photo;
+	this.scores = scores;
+}
 
+module.exports = allFriendsData
+module.exports = newFriend
