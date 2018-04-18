@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(() => {
 
   // Object of questionlists
   var question = [
@@ -20,13 +20,15 @@ $(document).ready(function() {
 
   var userObj = {};
 
+  var score = []
+
   // Loop through each element in question and create table row  
   question.forEach( q => {
     qn++;
     // Creating div/writing to display question data
     questionDiv.push($("<h3>").text(`Question ${qn}`));
     questionDiv.push($("<h4>").text(q));
-    var btnDiv = $("<select class='custom-select col-sm-5' id='Answer-"+ qn +"'>")
+    var btnDiv = $("<select class='chosen-select col-sm-3' id='Answer-"+ qn +"'>")
     btnDiv.append($("<option selected >Select an Option</option>"))
     btnDiv.append($("<option value='1'>1 (Strongly Disagree)</option>"))
     btnDiv.append($("<option value='2'>2</option>"))
@@ -39,8 +41,7 @@ $(document).ready(function() {
   // Append questionDiv to tableData div
   $("#tableData").append(questionDiv);
 
-  $("#submit").click(() => {
-    var scores = []
+  $("#submit").click(function() {
     // console.log($("#name").val());
     var userName = $("#name").val();
     
@@ -49,15 +50,20 @@ $(document).ready(function() {
 
     for (let i=1;i<=10;i++) {
       // console.log($("#Answer-"+ i).val());
-      scores.push($("#Answer-"+ i).val())
+      score.push($("#Answer-"+ i).val())
     }
-    userObj = {
+    var userObj = {
       name: userName,
       photo: userPhoto,
-      scores: scores
+      score: score
     }
 
     console.log(userObj)
+    
+    $.post("/api/friends", userObj), function(data) {
+      console.log(data);
+      alert("adding to array");
+    }
   })
 })
 

@@ -1,5 +1,5 @@
 // initial array to hold all friend data
-var allFriendsData = [
+module.exports = [
 	{
 		name: 'Love Robot',
 		photo: "https://www.vecteezy.com/vector-art/72515-robots-in-love",
@@ -7,11 +7,3 @@ var allFriendsData = [
 	}
 ];
 
-var newFriend = function(name, photo, scores) {
-	this.name = name;
-	this.photo = photo;
-	this.scores = scores;
-}
-
-module.exports = allFriendsData
-module.exports = newFriend
